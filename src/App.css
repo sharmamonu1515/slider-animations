@@ -1,0 +1,519 @@
+.App {
+  text-align: center;
+}
+
+.animation-options {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+}
+
+.animation-options input[type="text"], .animation-options select {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid grey;
+  transition: all 0.3s ease;
+}
+
+.animation-options input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.carousel-container {
+  margin-top: 50px;
+}
+
+.carousel {
+  position: relative;
+}
+
+.carouselWidth {
+  width: 55%;
+  margin: auto;
+}
+
+.carousel-item {
+  width: 100%;
+  height: 100%;
+  max-height: 90%;
+}
+
+/* // */
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  --animation-duration: 2s;
+  --animation-delay: 0s;
+  --animation-direction: top;
+  --animation-distance: 1;
+  --animation-shape: circle;
+  --expand-animation: circle;
+  --animation-style: gentle;
+}
+
+.carousel-item {
+  position: relative;
+  display: none;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  transition: -webkit-transform .6s ease;
+  transition: transform .6s ease;
+  transition: transform .6s ease, -webkit-transform .6s ease;
+  box-sizing: border-box;
+}
+
+.carousel-item.active,
+.carousel-item-next,
+.carousel-item-prev {
+  display: block;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  text-align: center;
+  outline: 0;
+  border: 0;
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+  padding: 0 7px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.carousel-control-prev {
+  right: 100%;
+}
+
+.carousel-control-next {
+  left: 100%;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.5s ease;
+}
+
+/* Fade Animation */
+.fade {
+  animation: fadeAnimation var(--animation-duration) var(--animation-delay) linear forwards;
+}
+
+@keyframes fadeAnimation {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.carousel-item {
+  transition-property: transform;
+}
+
+.carousel-item.float {
+  animation: float var(--animation-duration) ease-in-out var(--animation-delay) forwards;
+}
+
+@keyframes float {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+/* Blur Animation */
+@keyframes blurAnimation {
+  from {
+    filter: blur(var(--blur-amount));
+  }
+  to {
+    filter: blur(0px);
+  }
+}
+
+.blur-gentle {
+  --blur-amount: 2px;
+  animation: blurAnimation var(--animation-duration) var(--animation-delay) ease-in-out forwards;
+}
+
+.blur-moderate {
+  --blur-amount: 4px;
+  animation: blurAnimation var(--animation-duration) var(--animation-delay) ease-in-out forwards;
+}
+
+.blur-intense {
+  --blur-amount: 6px;
+  animation: blurAnimation var(--animation-duration) var(--animation-delay) ease-in-out forwards;
+}
+
+/* Expand Animation */
+@keyframes expandRight {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+@keyframes expandTopRight {
+  from {
+    transform: scale(0);
+    transform-origin: left bottom;
+  }
+  to {
+    transform: scale(1);
+    transform-origin: left bottom;
+  }
+}
+
+@keyframes expandTop {
+  from {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  to {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+}
+
+@keyframes expandTopLeft {
+  from {
+    transform: scale(0);
+    transform-origin: right bottom;
+  }
+  to {
+    transform: scale(1);
+    transform-origin: right bottom;
+  }
+}
+
+@keyframes expandLeft {
+  from {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+}
+
+@keyframes expandBottomLeft {
+  from {
+    transform: scale(0);
+    transform-origin: right top;
+  }
+  to {
+    transform: scale(1);
+    transform-origin: right top;
+  }
+}
+
+@keyframes expandBottom {
+  from {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  to {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+}
+
+@keyframes expandBottomRight {
+  from {
+    transform: scale(0);
+    transform-origin: left top;
+  }
+  to {
+    transform: scale(1);
+    transform-origin: left top;
+  }
+}
+
+@keyframes expandCenter {
+  from {
+    transform: scale(0);
+    transform-origin: center;
+  }
+  to {
+    transform: scale(1);
+    transform-origin: center;
+  }
+}
+
+.expand-gentle {
+  animation: var(--expand-animation) var(--animation-duration) var(--animation-delay) ease-in-out;
+}
+
+.expand-moderate {
+  animation: var(--expand-animation) calc(var(--animation-duration) * 0.75) var(--animation-delay) ease-in-out;
+}
+
+.expand-intense {
+  animation: var(--expand-animation) calc(var(--animation-duration) * 0.5) var(--animation-delay) ease-in-out;
+}
+/* Shrink Animation */
+@keyframes shrinkAnimation {
+  from {
+    transform: scale(var(--shrink-amount));
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.shrink-gentle {
+  --shrink-amount: 0.9;
+  animation: shrinkAnimation var(--animation-duration) var(--animation-delay) ease-in-out forwards;
+}
+
+.shrink-moderate {
+  --shrink-amount: 0.75;
+  animation: shrinkAnimation var(--animation-duration) var(--animation-delay) ease-in-out forwards;
+}
+
+.shrink-intense {
+  --shrink-amount: 0.6;
+  animation: shrinkAnimation var(--animation-duration) var(--animation-delay) ease-in-out forwards;
+}
+
+/* Reveal Animation */
+@keyframes revealFromTop {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes revealFromBottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes revealFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes revealFromRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.reveal-top {
+  animation: revealFromTop var(--animation-duration) var(--animation-delay) ease-in-out forwards;
+}
+
+.reveal-bottom {
+  animation: revealFromBottom var(--animation-duration) var(--animation-delay) ease-in-out forwards;
+}
+
+.reveal-left {
+  animation: revealFromLeft var(--animation-duration) var(--animation-delay) ease-in-out forwards;
+}
+
+.reveal-right {
+  animation: revealFromRight var(--animation-duration) var(--animation-delay) ease-in-out forwards;
+}
+
+/* Keyframes for shape animation */
+@keyframes shapeToImage {
+  0% {
+    clip-path: var(--start-clip-path);
+    opacity: 0;
+  }
+  100% {
+    clip-path: var(--end-clip-path);
+    opacity: 1;
+  }
+}
+
+/* Shape styles */
+.shape-oval, .shape-circle, .shape-square, .shape-diamond {
+  --animation-duration: 1.5s;
+  --animation-delay: 0s;
+  animation: shapeToImage var(--animation-duration) var(--animation-delay) ease-in-out forwards;
+}
+
+.shape-oval {
+  --start-clip-path: ellipse(50% 50% at 50% 50%);
+  --end-clip-path: inset(0%);
+}
+
+.shape-circle {
+  --start-clip-path: circle(50%);
+  --end-clip-path: inset(0%);
+}
+
+.shape-square {
+  --start-clip-path: inset(0%);
+  --end-clip-path: inset(0%);
+}
+
+.shape-diamond {
+  --start-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  --end-clip-path: inset(0%);
+}
+
+/* Flip Animation */
+@keyframes flipTop {
+  from {
+    transform: rotateX(180deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes flipBottom {
+  from {
+    transform: rotateX(-180deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes flipLeft {
+  from {
+    transform: rotateY(-180deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes flipRight {
+  from {
+    transform: rotateY(180deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+/* Motion styles */
+.flip-gentle {
+  animation: var(--flip-animation) var(--animation-duration) var(--animation-delay) ease-in-out forwards;
+}
+
+.flip-moderate {
+  animation: var(--flip-animation) var(--animation-duration) var(--animation-delay) ease-in-out forwards;
+}
+
+.flip-intense {
+  animation: var(--flip-animation) var(--animation-duration) var(--animation-delay) ease-in-out forwards;
+}
+
+/* Grow Animation */
+.grow {
+  animation: growAnimation var(--animation-duration) var(--animation-delay) ease-in-out forwards;
+}
+
+@keyframes growAnimation {
+  0% { transform: scale(var(--animation-distance)); }
+  100% { transform: scale(1); }
+}
+
+/* Wink Animation */
+@keyframes wynkHorizontal {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(50%);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Keyframes for vertical Wynk animation */
+@keyframes wynkVertical {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(50%);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.wynk-horizontal {
+  animation: wynkHorizontal var(--animation-duration) var(--animation-delay) ease-in-out forwards;
+}
+
+.wynk-vertical {
+  animation: wynkVertical var(--animation-duration) var(--animation-delay) ease-in-out forwards;
+}
+
+/* Slide Animation */
+.slide {
+  animation: slideAnimation var(--animation-duration) var(--animation-delay) ease-in-out forwards;
+}
+
+@keyframes slideAnimation {
+  0% { transform: translateX(var(--animation-direction)); }
+  100% { transform: translateX(0); }
+}
+
+/* Flash Animation */
+.flash {
+  animation: flashAnimation var(--animation-duration) var(--animation-delay) ease-in-out forwards;
+}
+
+@keyframes flashAnimation {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+
+@media only screen and (max-width: 768px) {
+  .carouselWidth {
+    width: 100%;
+  }
+}
